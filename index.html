@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/4439e3b362.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header class="bg-secondary fixed-top pl-3 border-bottom border-dark">
+        <h1>Weather Dashboard</h1>
+    </header>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3 px-1 position-fixed bg-info border border-dark height100 pt-5">
+                <h5 class="text-center pt-2">Search by city: </h5>
+                <form  onSubmit="return false;" class="form-inline text-center justify-content-center">
+                    <input class="form" placeholder="Search" id= "searchBar">
+                    <button id="searchBtn" class="btn btn-outline-light" type="button"><i class="fas fa-search"></i></button>
+                </form>
+                <h5 class="text-center">Your previously searched cities: </h5>
+                <div id="searchedCity"></div>
+            </div>
+            <div class= "col offset-3 text-center pt-5 mt-1">
+                <h2 class="justify-content-center text-dark" id="nameOfCity"></h2>
+                <p id="todaysTemp"></p>
+                <p id="todaysHumidity"></p>
+                <p id="todaysWindSpeed"></p>
+                <img id="todaysIcon" src="">
+            </div>
+            
+        
+        
+        </div>
+        
+        
+        
+        <div class= "row justify-content-center text-center">
+            <div class= "col offset-3">
+                <h5 class="text-center">Five Day Weather Forecast</h5>
+                <div id=fiveDayHolder class="d-flex justify-content-center pl-2 ml-2"></div>
+           </div>
+        </div>
+
+
+
+    </div>
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

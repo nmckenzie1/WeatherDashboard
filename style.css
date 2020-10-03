@@ -1,0 +1,15 @@
+
+.height100 {
+    height:100%
+}
+body{
+    height:100%
+}
+
+form{
+    min-width: 0
+}
+
+input{
+    min-width: 0
+}
