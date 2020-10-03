@@ -14,7 +14,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-3 px-1 position-fixed bg-info border border-dark height100 pt-5">
+            <div class="col-3 px-1 position-fixed bg-primary border border-dark height100 pt-5">
                 <h5 class="text-center pt-2">Search by city: </h5>
                 <form  onSubmit="return false;" class="form-inline text-center justify-content-center">
                     <input class="form" placeholder="Search" id= "searchBar">
@@ -23,11 +23,13 @@
                 <h5 class="text-center">Your previously searched cities: </h5>
                 <div id="searchedCity"></div>
             </div>
-            <div class= "col offset-3 text-center pt-5 mt-1">
+            <div class= "col offset-3 text-center pt-5 mt-1 bg-info" id="todayBlock">
                 <h2 class="justify-content-center text-dark" id="nameOfCity"></h2>
                 <p id="todaysTemp"></p>
                 <p id="todaysHumidity"></p>
                 <p id="todaysWindSpeed"></p>
+                <p>Today's UV Index:</p>
+                <p id="todaysUVI"></p>
                 <img id="todaysIcon" src="">
             </div>
             

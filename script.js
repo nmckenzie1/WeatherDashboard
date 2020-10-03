@@ -50,7 +50,17 @@ function getCity(coordinates) {
 }
 
 getCoordintes();
+populateButton();
 
+function populateButton(){
+  
+  var newBtn = $("<button>");
+  var savedCity = localStorage.getItem("lastCity")
+  newBtn.attr("id", savedCity.replace(/\s+/g, ''));
+  newBtn.attr("class", "cityBtn btn btn-block btn-dark");
+  newBtn.text(savedCity);
+  $("#searchedCity").append(newBtn);
+}
 
 function setcity(city){
 var cityFull = "q=" + city + "&units=imperial&appid=";
@@ -68,20 +78,48 @@ var queryWeather =
             
             cityChop = city.replace(/\s+/g, '');
             $("#" + cityChop).remove()
-            
+            alert("City not found!")
         }
             
         }
 
     }).then(function (response) {
-      console.log(response)
+      
     var currentIcon = ("http://openweathermap.org/img/w/" + response.weather[0].icon + ".png")
     $("#nameOfCity").text(response.name);
     $("#todaysWindSpeed").text("Wind Speed: " + response.wind.speed);
     $("#todaysHumidity").text("Humidity: " + response.main.humidity);
     $("#todaysTemp").text("Today's Temperature: " + response.main.temp);
-    $("#todaysIcon").attr("src", currentIcon)
-  });
+    $("#todaysIcon").attr("src", currentIcon);
+    var lat = response.coord.lat;
+    var lon = response.coord.lon;
+    var queryUVI = ("http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=166a433c57516f51dfab1f7edaed8413");
+    $.ajax({
+      url: queryUVI,
+      method: "GET",
+    }).then(function (response) {
+      var UVIndex = parseInt(response.value)
+      console.log(UVIndex)
+      if (UVIndex < 3) {
+        $("#todaysUVI").css("color", "green")
+        $("#todaysUVI").text(UVIndex + " LOW")
+        }
+      if ((UVIndex >=3) && (UVIndex < 6)) {
+       console.log("yellow!")
+        $("#todaysUVI").css("color", "yellow")
+        $("#todaysUVI").text(UVIndex + " MODERATE")
+        }
+        if ((UVIndex >=6) && (UVIndex < 9)) {
+          console.log("orange")
+           $("#todaysUVI").css("color", "orange")
+           $("#todaysUVI").text(UVIndex + " HIGH")
+           }
+           if (UVIndex >= 9) {
+            $("#todaysUVI").css("color", "red")
+            $("#todaysUVI").text(UVIndex + " VERY HIGH")
+            }
+      })
+    });
   $.ajax({
         url: queryForecast,
         method: "GET",
@@ -92,10 +130,6 @@ var queryWeather =
             var temp = response.list[i].main.temp
             var humidity = response.list[i].main.humidity
             var windSpeed = response.list[i].wind.speed
-            // console.log("humidity = " + humidity + " percent")
-            // console.log("temp = " + temp)
-            // console.log("windspeed: " + windSpeed)
-            // console.log(response.list)
             var day = (response.list[i].dt_txt.split("-")[2].split(" ")[0])
             var month = (response.list[i].dt_txt.split("-")[1]);
             var date = month + "/" + day 
@@ -136,10 +170,10 @@ $("#searchBtn").click(function(){
     newBtn.attr("class", "cityBtn btn btn-block btn-dark");
     newBtn.text(newCity);
     $("#searchedCity").append(newBtn);
+    localStorage.setItem("lastCity", newCity);
     });
 
 $(document).on('click','.cityBtn', function(event){
     var clickedCity = (event.target.innerText);
-    console.log(clickedCity)
     setcity(clickedCity)
 })
