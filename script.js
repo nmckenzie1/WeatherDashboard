@@ -172,6 +172,10 @@ $("#searchBtn").click(function(){
     newBtn.attr("id", newCity.replace(/\s+/g, ''));
     newBtn.attr("class", "cityBtn btn btn-block btn-dark");
     newBtn.text(newCity);
+    if ($("#" + newCity).length){
+      alert("City already exists!")
+      return
+      }
     $("#searchedCity").append(newBtn);
     localStorage.setItem("lastCity", newCity);
     });
