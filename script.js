@@ -56,10 +56,13 @@ function populateButton(){
   
   var newBtn = $("<button>");
   var savedCity = localStorage.getItem("lastCity")
-  newBtn.attr("id", savedCity.replace(/\s+/g, ''));
+  if (savedCity != null) {
+    newBtn.attr("id", savedCity.replace(/\s+/g, ''));
   newBtn.attr("class", "cityBtn btn btn-block btn-dark");
   newBtn.text(savedCity);
   $("#searchedCity").append(newBtn);
+  }
+  
 }
 
 function setcity(city){
