@@ -88,7 +88,7 @@ var queryWeather =
 
     }).then(function (response) {
       
-    var currentIcon = ("http://openweathermap.org/img/w/" + response.weather[0].icon + ".png")
+    var currentIcon = ("https://openweathermap.org/img/w/" + response.weather[0].icon + ".png")
     $("#nameOfCity").text(response.name);
     $("#todaysWindSpeed").text("Wind Speed: " + response.wind.speed);
     $("#todaysHumidity").text("Humidity: " + response.main.humidity);
@@ -96,7 +96,7 @@ var queryWeather =
     $("#todaysIcon").attr("src", currentIcon);
     var lat = response.coord.lat;
     var lon = response.coord.lon;
-    var queryUVI = ("http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=166a433c57516f51dfab1f7edaed8413");
+    var queryUVI = ("https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=166a433c57516f51dfab1f7edaed8413");
     $.ajax({
       url: queryUVI,
       method: "GET",
@@ -136,7 +136,7 @@ var queryWeather =
             var day = (response.list[i].dt_txt.split("-")[2].split(" ")[0])
             var month = (response.list[i].dt_txt.split("-")[1]);
             var date = month + "/" + day 
-            var dayIcon = ("http://openweathermap.org/img/w/" + response.list[i].weather[0].icon + ".png")
+            var dayIcon = ("https://openweathermap.org/img/w/" + response.list[i].weather[0].icon + ".png")
             var daysAppended = 0
                     if (daysAppended >= 5){
                         return
